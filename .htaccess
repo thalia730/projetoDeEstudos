@@ -1,0 +1,8 @@
+# Avisa que o arquivo padrão de entrada está dentro da pasta views
+DirectoryIndex views/login.php
+
+# Impede a listagem crua de pastas
+Options -Indexes
+
+# Garante a acentuação correta
+AddDefaultCharset UTF-8

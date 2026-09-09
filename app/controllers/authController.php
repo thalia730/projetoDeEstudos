@@ -1,6 +1,6 @@
 <?php
-require_once 'config/conexao.php';
-require_once 'models/usuario.php';
+require_once __DIR__ . '/../../config/conexao.php';
+require_once __DIR__ . '/../models/usuario.php';
 
 class authController {
     public function login() {
