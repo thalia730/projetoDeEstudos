@@ -1,12 +1,12 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 if (!isset($_SESSION['usuario_logado']) || $_SESSION['tipo'] !== 'aluno') {
-    header("Location: ../../login.php");
+   header("Location: ../login.php");
     exit();
 }
 
 require_once '../../config/conexao.php';
-require_once '../../models/questao.php';
+require_once '../../app/models/questao.php';
 
 $questaoModel = new Questao($conexao);
 $questoes = $questaoModel->listarQuestoes();
@@ -43,7 +43,7 @@ $questoes = $questaoModel->listarQuestoes();
                         <h3>Questão <?= $index + 1 ?></h3>
                         <p class="enunciado"><?= nl2br(htmlspecialchars($q['enunciado'])) ?></p>
                         
-                        <form action="../../index.php?action=corrigirQuestao" method="POST">
+                        <form action="../../public/index.php?action=corrigirQuestao" method="POST">
                             <input type="hidden" name="id_questao" value="<?= $q['id'] ?>">
                             
                             <label class="opcao">

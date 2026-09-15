@@ -1,23 +1,36 @@
 <?php
 
-class questao {
+class Questao {
+
     private $conexao;
 
     public function __construct($conexao) {
         $this->conexao = $conexao;
     }
 
-    public function listarQuestoes() {
+    public function listarQuestoes($id_materia = null) {
+
         $sql = "SELECT q.*, m.nome AS materia_nome 
         FROM questoes q 
-        INNERJOIN materias m ON q.id_materia = m.id
-        order by q.id desc";
+        INNER JOIN materias m ON q.id_materia = m.id";
+
+        if ($id_materia !== null) {
+            $sql .= " WHERE q.id_materia = :id_materia";
+        }
+
+        $sql .= " ORDER BY q.id DESC";
+
         $stmt = $this->conexao->prepare($sql);
+
+        if ($id_materia !== null) {
+            $stmt->bindParam(':id_materia', $id_materia);
+        }
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public function adicionarQuestao($enunciado,$alternativa_a, $alternativa_b, $alternativa_c, $alternativa_d, $resposta_correta, $id_materia) {
+    public function adicionarQuestao($enunciado, $alternativa_a, $alternativa_b, $alternativa_c, $alternativa_d, $resposta_correta, $id_materia) {
+
         $sql = "INSERT INTO questoes (enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, resposta_correta, id_materia) VALUES (:enunciado, :alternativa_a, :alternativa_b, :alternativa_c, :alternativa_d, :resposta_correta, :id_materia)";
         $stmt = $this->conexao->prepare($sql);
         $stmt->bindParam(':enunciado', $enunciado);

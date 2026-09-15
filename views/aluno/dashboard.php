@@ -1,7 +1,7 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 if (!isset($_SESSION['usuario_logado']) || $_SESSION['tipo'] !== 'aluno') {
-    header("Location: ../../login.php");
+    header("Location: ../login.php");
     exit();
 }
 ?>
@@ -21,7 +21,7 @@ if (!isset($_SESSION['usuario_logado']) || $_SESSION['tipo'] !== 'aluno') {
 
         <nav class="menu-dashboard">
             <a href="simulado.php" class="btn">Iniciar Simulado Geral</a>
-            <a href="../../login.php" class="btn btn-sair">Sair</a>
+            <a href="../../public/index.php?action=deslogar" class="btn btn-sair">Sair</a>
         </nav>
 
         <main class="dashboard-welcome">

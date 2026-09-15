@@ -1,6 +1,6 @@
 <?php
-require_once 'config/conexao.php';
-require_once 'models/questao.php';
+require_once __DIR__ . '/../../config/conexao.php';
+require_once __DIR__ . '/../models/questao.php';
 
 class alunoController
 {
@@ -25,9 +25,9 @@ class alunoController
 
             $questao = $questaoModel->buscarQuestaoPorId($id_questao);
             if ($questao['resposta_correta'] === $resposta_aluno) {
-                header('Location: simulado.php?sucesso=correto&id=' . $id_questao);
+                header('Location: ../views/aluno/simulado.php?resultado=correto&id=' . $id_questao);
             } else {
-                header('Location: simulado.php?resultado=errado&id=' . $id_questao);
+                header('Location: ../views/aluno/simulado.php?resultado=errado&id=' . $id_questao);
             }
             exit();
         }

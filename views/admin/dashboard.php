@@ -1,17 +1,26 @@
 <?php
+
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
+
 // Segurança: garante que apenas admins acessem
 if (!isset($_SESSION['usuario_logado']) || $_SESSION['tipo'] !== 'admin') {
-    header("Location: ../../login.php");
+    header("Location: /projetoDeEstudos/views/login.php");
     exit();
 }
+
+require_once '../../config/conexao.php';
+require_once '../../app/models/materia.php';
+
+$materiaModel = new Materia($conexao);
+$materias = $materiaModel->listarMaterias();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Painel Administrativo</title>
-    <link rel="stylesheet" href="../../public/style.css">
+    <link rel="stylesheet" href="/projetoDeEstudos/public/style.css">
 </head>
 <body>
     <div class="container">
@@ -21,13 +30,44 @@ if (!isset($_SESSION['usuario_logado']) || $_SESSION['tipo'] !== 'admin') {
         </header>
 
         <nav class="menu-dashboard">
-            <a href="cadastrarQuestao.php" class="btn">Gerenciar Questões</a>
-            <a href="../../login.php" class="btn btn-sair">Sair do Sistema</a>
+
+            <a href="cadastrarQuestao.php" class="btn">
+                Cadastrar Nova Questão
+            </a>
+
+            <div class="campo">
+                <label for="id_materia">Gerenciar Questões por Matéria:</label>
+
+                <form action="questoes.php" method="GET">
+                    <select name="id_materia" id="id_materia" required>
+                        <option value="">-- Escolha uma disciplina --</option>
+
+                        <?php foreach ($materias as $m): ?>
+                            <option value="<?= $m['id'] ?>">
+                                <?= htmlspecialchars($m['nome']) ?>
+                            </option>
+                        <?php endforeach; ?>
+
+                    </select>
+
+                    <button type="submit" class="btn">
+                        Ver Questões
+                    </button>
+                </form>
+            </div>
+
+            <a href="/projetoDeEstudos/public/index.php?action=deslogar" class="btn btn-sair">
+                Sair do Sistema
+            </a>
+
         </nav>
 
         <main class="dashboard-welcome">
             <h3>Visão Geral</h3>
-            <p>Utilize o menu acima para cadastrar novas perguntas no banco de dados do simulado.</p>
+            <p>
+                Cadastre novas questões ou selecione uma matéria para visualizar,
+                editar ou excluir suas questões.
+            </p>
         </main>
     </div>
 </body>

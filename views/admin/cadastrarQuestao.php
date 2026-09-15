@@ -1,13 +1,13 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 if (!isset($_SESSION['usuario_logado']) || $_SESSION['tipo'] !== 'admin') {
-    header("Location: ../../login.php");
+    header("Location: ../login.php");
     exit();
 }
 
 // Puxa os dados das matérias para listar no <select>
 require_once '../../config/conexao.php';
-require_once '../../models/materia.php';
+require_once '../../app/models/materia.php';
 $materiaModel = new Materia($conexao);
 $materias = $materiaModel->listarMaterias();
 ?>
@@ -29,7 +29,7 @@ $materias = $materiaModel->listarMaterias();
             <div class="alerta sucesso">Operação realizada com sucesso!</div>
         <?php endif; ?>
 
-        <form action="../../index.php?action=criarQuestao" method="POST" class="formulario">
+<form action="../../public/index.php?action=criarQuestao" method="POST">
             <div class="campo">
                 <label for="id_materia">Selecione a Matéria:</label>
                 <select name="id_materia" id="id_materia" required>

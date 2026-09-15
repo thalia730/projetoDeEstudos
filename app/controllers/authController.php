@@ -27,9 +27,9 @@ class authController {
                 $_SESSION['email'] = $email;
 
                 if ($tipo === 'admin') {
-                    header('Location: admin_dashboard.php');
+                    header('Location: ../views/admin/dashboard.php');
                 } else {
-                    header('Location: aluno_dashboard.php');
+                    header('Location: ../views/aluno/dashboard.php');
                 }
                 exit();
             } else {
@@ -43,7 +43,7 @@ class authController {
             session_start();
         }
         session_destroy();
-        header('Location: login.php');
+        header("Location: ../views/login.php");
         exit();
     }
 }

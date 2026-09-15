@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) { session_start(); }
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sistema de Estudos</title>
     <!-- Vincula ao arquivo css que está dentro da pasta pública -->
-    <link rel="stylesheet" href="public/style.css">
+   <link rel="stylesheet" href="/projetoDeEstudos/public/style.css">
 </head>
 <body class="body-login">
     <div class="card-login">
@@ -26,7 +26,7 @@ if (session_status() === PHP_SESSION_NONE) { session_start(); }
         <?php endif; ?>
 
         <!-- Envia as informações para o arquivo index.php público que gerencia as ações -->
-        <form action="public/index.php?action=logar" method="POST" class="formulario">
+       <form action="/projetoDeEstudos/public/index.php?action=logar" method="POST" class="formulario">
             
             <div class="campo">
                 <label for="email">E-mail de acesso:</label>
@@ -51,6 +51,6 @@ if (session_status() === PHP_SESSION_NONE) { session_start(); }
     </div>
 
     <!-- Vincula ao arquivo javascript para possíveis validações visuais -->
-    <script src="public/script.js"></script>
+   <script src="/projetoDeEstudos/public/script.js"></script>
 </body>
 </html>
