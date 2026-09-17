@@ -286,6 +286,17 @@ if ($editar) {
 
                                     </div>
 
+                                    <div class="campo">
+                                        <label>
+                                            Explicação da Resposta:
+                                        </label>
+
+                                        <textarea
+                                            name="explicacao"
+                                            rows="5"
+                                            placeholder="Explique por que essa é a resposta correta..."><?= htmlspecialchars($q['explicacao'] ?? '') ?></textarea>
+                                    </div>
+
 
                                     <button
                                         type="submit"

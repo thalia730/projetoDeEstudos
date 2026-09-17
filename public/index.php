@@ -37,7 +37,7 @@ switch ($action) {
         $admin->deletarQuestao();
         break;
 
-    case 'corrigirQuestao':
+    case 'corrigirQuestoes':
         $aluno = new AlunoController();
         $aluno->corrigirQuestoes();
         break;

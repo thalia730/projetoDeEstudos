@@ -56,7 +56,8 @@ class adminController
                 $_POST['alternativa_c'],
                 $_POST['alternativa_d'],
                 $_POST['resposta_correta'],
-                $_POST['id_materia']
+                $_POST['id_materia'],
+                $_POST['explicacao']
             );
             if ($sucesso) {
                 header("Location: /projetoDeEstudos/views/admin/cadastrarQuestao.php?sucesso=cadastrado");
@@ -80,7 +81,8 @@ class adminController
                 $_POST['alternativa_c'],
                 $_POST['alternativa_d'],
                 $_POST['resposta_correta'],
-                $_POST['id_materia']
+                $_POST['id_materia'],
+                $_POST['explicacao']
             );
 
             if ($sucesso) {
@@ -95,28 +97,26 @@ class adminController
             }
         }
     }
-public function deletarQuestao()
-{
-    if (isset($_GET['id'])) {
+    public function deletarQuestao()
+    {
+        if (isset($_GET['id'])) {
 
-        global $conexao;
+            global $conexao;
 
-        $questaoModel = new Questao($conexao);
+            $questaoModel = new Questao($conexao);
 
-        if ($questaoModel->deletarQuestao($_GET['id'])) {
+            if ($questaoModel->deletarQuestao($_GET['id'])) {
 
-            $id_materia = $_GET['id_materia'] ?? '';
+                $id_materia = $_GET['id_materia'] ?? '';
 
-            header(
-                "Location: /projetoDeEstudos/views/admin/questoes.php?id_materia="
-                . $id_materia
-                . "&sucesso=deletado"
-            );
+                header(
+                    "Location: /projetoDeEstudos/views/admin/questoes.php?id_materia="
+                        . $id_materia
+                        . "&sucesso=deletado"
+                );
 
-            exit();
+                exit();
+            }
         }
     }
-}
-
-
 }

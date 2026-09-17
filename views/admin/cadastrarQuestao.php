@@ -1,5 +1,7 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['usuario_logado']) || $_SESSION['tipo'] !== 'admin') {
     header("Location: ../login.php");
     exit();
@@ -13,11 +15,13 @@ $materias = $materiaModel->listarMaterias();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Cadastrar Questão</title>
     <link rel="stylesheet" href="../../public/style.css">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -29,7 +33,7 @@ $materias = $materiaModel->listarMaterias();
             <div class="alerta sucesso">Operação realizada com sucesso!</div>
         <?php endif; ?>
 
-<form action="../../public/index.php?action=criarQuestao" method="POST">
+        <form action="../../public/index.php?action=criarQuestao" method="POST">
             <div class="campo">
                 <label for="id_materia">Selecione a Matéria:</label>
                 <select name="id_materia" id="id_materia" required>
@@ -75,8 +79,18 @@ $materias = $materiaModel->listarMaterias();
                 </select>
             </div>
 
+            <div class="campo">
+                <label for="explicacao">Explicação da Resposta:</label>
+                <textarea
+                    name="explicacao"
+                    id="explicacao"
+                    rows="5"
+                    placeholder="Explique por que essa é a resposta correta..."></textarea>
+            </div>
+
             <button type="submit" class="btn-salvar">Salvar Questão</button>
         </form>
     </div>
 </body>
+
 </html>
