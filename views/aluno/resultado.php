@@ -43,21 +43,48 @@ foreach ($respostas as $id_questao => $resposta) {
 <head>
     <meta charset="UTF-8">
     <title>Resultado do Simulado</title>
+    <link rel="stylesheet" href="/projetoDeEstudos/public/style.css">
 </head>
 
 <body>
+    <main class="pagina-resultado">
+    <div class="topo-resultado">
 
-    <h1>🎉 Simulado Finalizado!</h1>
+    <h1>🎓 Simulado Finalizado!</h1>
 
-    <p>Total de questões: <?= $total ?></p>
+    <p>Confira abaixo seu desempenho e a correção das questões.</p>
 
-    <p>✅ Acertos: <?= $acertos ?></p>
+</div>
 
-    <p>❌ Erros: <?= $erros ?></p>
+<div class="resumo-resultado">
 
-    <p>📊 Aproveitamento: <?= $porcentagem ?>%</p>
+    <div class="item-resumo total">
+        <span class="icone-resumo">📄</span>
+        <span>Total de questões</span>
+        <strong><?= $total ?></strong>
+    </div>
 
-    <h2>Correção das questões</h2>
+    <div class="item-resumo acertos">
+        <span class="icone-resumo">✅</span>
+        <span>Acertos</span>
+        <strong><?= $acertos ?></strong>
+    </div>
+
+    <div class="item-resumo erros">
+        <span class="icone-resumo">❌</span>
+        <span>Erros</span>
+        <strong><?= $erros ?></strong>
+    </div>
+
+    <div class="item-resumo aproveitamento">
+        <span class="icone-resumo">📊</span>
+        <span>Aproveitamento</span>
+        <strong><?= $porcentagem ?>%</strong>
+    </div>
+
+</div>
+
+<h2 class="titulo-correcao">Correção das questões</h2>
 
     <?php foreach ($questoesResultado as $index => $q): ?>
 
@@ -66,60 +93,58 @@ foreach ($respostas as $id_questao => $resposta) {
         $respostaCorreta = $q['resposta_correta'];
         ?>
 
-        <div>
-
+        <div class="card-resultado">
             <h3>Questão <?= $index + 1 ?></h3>
 
             <p>
                 <?= htmlspecialchars($q['enunciado']) ?>
             </p>
 
-            <p class="
-    <?php
-        if ($respostaCorreta === 'A') {
-            echo 'correta';
-        } elseif ($respostaAluno === 'A') {
-            echo 'errada';
-        }
-    ?>
+            <p class="alternativa <?php
+                                    if ($respostaCorreta === 'A') {
+                                        echo 'correta';
+                                    } elseif ($respostaAluno === 'A') {
+                                        echo 'errada';
+                                    }
+                                    ?>
 ">
                 A) <?= htmlspecialchars($q['alternativa_a']) ?>
             </p>
 
-            <p class="<?php
-                        if ($respostaCorreta === 'B') {
-                            echo 'correta';
-                        } elseif ($respostaAluno === 'B') {
-                            echo 'errada';
-                        }
-                        ?>">
+            <p class="alternativa <?php
+                                    if ($respostaCorreta === 'B') {
+                                        echo 'correta';
+                                    } elseif ($respostaAluno === 'B') {
+                                        echo 'errada';
+                                    }
+                                    ?>">
                 B) <?= htmlspecialchars($q['alternativa_b']) ?>
             </p>
 
-            <p class="<?php
-                        if ($respostaCorreta === 'C') {
-                            echo 'correta';
-                        } elseif ($respostaAluno === 'C') {
-                            echo 'errada';
-                        }
-                        ?>">
+            <p class="alternativa <?php
+                                    if ($respostaCorreta === 'C') {
+                                        echo 'correta';
+                                    } elseif ($respostaAluno === 'C') {
+                                        echo 'errada';
+                                    }
+                                    ?>">
                 C) <?= htmlspecialchars($q['alternativa_c']) ?>
             </p>
 
-            <p class="<?php
-                        if ($respostaCorreta === 'D') {
-                            echo 'correta';
-                        } elseif ($respostaAluno === 'D') {
-                            echo 'errada';
-                        }
-                        ?>">
+            <p class="alternativa <?php
+                                    if ($respostaCorreta === 'D') {
+                                        echo 'correta';
+                                    } elseif ($respostaAluno === 'D') {
+                                        echo 'errada';
+                                    }
+                                    ?>">
                 D) <?= htmlspecialchars($q['alternativa_d']) ?>
             </p>
-
             <?php if ($respostaAluno !== null && $respostaAluno !== $respostaCorreta): ?>
 
                 <button
                     type="button"
+                    id="btn-por-que-<?= $q['id'] ?>"
                     class="btn-por-que"
                     onclick="mostrarExplicacao(<?= $q['id'] ?>)">
                     Por que?
@@ -131,10 +156,9 @@ foreach ($respostas as $id_questao => $resposta) {
 
                     <button
                         type="button"
-                        id="btn-por-que-<?= $q['id'] ?>"
-                        class="btn-por-que"
-                        onclick="mostrarExplicacao(<?= $q['id'] ?>)">
-                        Por que?
+                        class="btn-fechar-explicacao"
+                        onclick="fecharExplicacao(<?= $q['id'] ?>)">
+                        X
                     </button>
 
                     <h4>💡 Por que?</h4>
@@ -144,8 +168,8 @@ foreach ($respostas as $id_questao => $resposta) {
                     </p>
 
                 </div>
-            <?php endif; ?>
 
+            <?php endif; ?>
         </div>
 
     <?php endforeach; ?>
@@ -162,8 +186,10 @@ foreach ($respostas as $id_questao => $resposta) {
         }
     </script>
 
-</body>
-
+    <a href="/projetoDeEstudos/views/aluno/simulado.php" class="btn-voltar">
+        ← Voltar
+    </a>
+    </main>
 </body>
 
 </html>
