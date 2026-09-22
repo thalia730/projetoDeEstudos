@@ -1,6 +1,8 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Segurança: garante que apenas admins acessem
 if (!isset($_SESSION['usuario_logado']) || $_SESSION['tipo'] !== 'admin') {
@@ -17,11 +19,13 @@ $materias = $materiaModel->listarMaterias();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Painel Administrativo</title>
     <link rel="stylesheet" href="/projetoDeEstudos/public/style.css">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -31,10 +35,17 @@ $materias = $materiaModel->listarMaterias();
 
         <nav class="menu-dashboard">
 
+            <h2>Cadastrar</h2>
+
             <a href="cadastrarQuestao.php" class="btn">
                 Cadastrar Nova Questão
             </a>
 
+            <a href="cadastrarResumo.php" class="btn">
+                Cadastrar Novo Resumo
+            </a>
+
+            <h2>Gerenciar</h2>
             <div class="campo">
                 <label for="id_materia">Gerenciar Questões por Matéria:</label>
 
@@ -54,6 +65,9 @@ $materias = $materiaModel->listarMaterias();
                         Ver Questões
                     </button>
                 </form>
+                <a href="resumos.php" class="btn">
+                    Gerenciar Resumos
+                </a>
             </div>
 
             <a href="/projetoDeEstudos/public/index.php?action=deslogar" class="btn btn-sair">
@@ -71,4 +85,5 @@ $materias = $materiaModel->listarMaterias();
         </main>
     </div>
 </body>
+
 </html>

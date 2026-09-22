@@ -37,6 +37,21 @@ switch ($action) {
         $admin->deletarQuestao();
         break;
 
+    case 'criarResumo':
+        $admin = new AdminController();
+        $admin->criarResumo();
+        break;
+
+    case 'editarResumo':
+        $admin = new AdminController();
+        $admin->editarResumo();
+        break;
+
+    case 'deletarResumo':
+        $admin = new AdminController();
+        $admin->deletarResumo();
+        break;
+
     case 'corrigirQuestoes':
         $aluno = new AlunoController();
         $aluno->corrigirQuestoes();

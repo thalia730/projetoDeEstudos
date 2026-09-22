@@ -48,7 +48,7 @@ if (isset($_GET['iniciar'])) {
     <div class="container">
         <header>
             <h1>Configurar Simulado</h1>
-            <a href="dashboard.php" class="btn btn-voltar">← Voltar ao Menu</a>
+            <a href="dashboard.php" class="btn btn-voltar">← Voltar ao menu</a>
         </header>
 
         <?php if (!isset($_GET['iniciar'])): ?>

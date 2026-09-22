@@ -3,6 +3,7 @@ require_once __DIR__ . '/../../config/conexao.php';
 require_once __DIR__ . '/../models/usuario.php';
 require_once __DIR__ . '/../models/questao.php';
 require_once __DIR__ . '/../models/materia.php';
+require_once __DIR__ . '/../models/resumo.php';
 
 class adminController
 {
@@ -65,6 +66,8 @@ class adminController
             }
         }
     }
+
+
     public function editarQuestao()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -115,6 +118,65 @@ class adminController
                         . "&sucesso=deletado"
                 );
 
+                exit();
+            }
+        }
+    }
+    public function criarResumo()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            global $conexao;
+
+            $resumoModel = new Resumo($conexao);
+
+            $sucesso = $resumoModel->adicionarResumo(
+                $_POST['id_materia'],
+                $_POST['titulo'],
+                $_POST['conteudo']
+            );
+
+            if ($sucesso) {
+                header("Location: /projetoDeEstudos/views/admin/cadastrarResumo.php?sucesso=cadastrado");
+                exit();
+            }
+        }
+    }
+    public function editarResumo()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            global $conexao;
+
+            $resumoModel = new Resumo($conexao);
+
+            $sucesso = $resumoModel->atualizarResumo(
+                $_POST['id'],
+                $_POST['id_materia'],
+                $_POST['titulo'],
+                $_POST['conteudo']
+            );
+
+            if ($sucesso) {
+                header(
+                    "Location: /projetoDeEstudos/views/admin/resumos.php?id_materia="
+                        . $_POST['id_materia']
+                        . "&sucesso=editado"
+                );
+                exit();
+            }
+        }
+    }
+
+    public function deletarResumo()
+    {
+        if (isset($_GET['id'])) {
+            global $conexao;
+
+            $resumoModel = new Resumo($conexao);
+
+            if ($resumoModel->deletarResumo($_GET['id'])) {
+                header(
+                    "Location: /projetoDeEstudos/views/admin/resumos.php?sucesso=deletado"
+                );
                 exit();
             }
         }
