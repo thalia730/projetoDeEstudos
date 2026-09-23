@@ -28,12 +28,15 @@ if (!isset($_SESSION['usuario_logado']) || $_SESSION['tipo'] !== 'aluno') {
             <a href="resumo.php" class="btn">
                 Ver Resumos
             </a>
+            <a href="metas.php" class="btn">
+                Minhas Metas
+            </a>
             <a href="../../public/index.php?action=deslogar" class="btn btn-sair">Sair</a>
         </nav>
 
         <main class="dashboard-welcome">
             <h3>Preparado para testar seus conhecimentos?</h3>
-            <p>Clique no botão acima para abrir o caderno de questões cadastradas pelos professores.</p>
+            <p>Acesse as ferramentas disponíveis para organizar e acompanhar seus estudos.</p>
         </main>
     </div>
 </body>

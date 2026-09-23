@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once __DIR__ . '/../../config/conexao.php';
 require_once __DIR__ . '/../models/questao.php';
+require_once __DIR__ . '/../models/meta.php';
 
 class alunoController
 {
@@ -106,4 +107,98 @@ class alunoController
             exit();
         }
     }
+    public function criarMeta()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        global $conexao;
+
+        $email = $_SESSION['email'] ?? null;
+
+        if (!$email) {
+            die("Aluno não está logado.");
+        }
+
+        $metaModel = new Meta($conexao);
+
+        $metaModel->adicionarMeta(
+            $email,
+            $_POST['titulo'],
+            $_POST['descricao']
+        );
+
+        header("Location: /projetoDeEstudos/views/aluno/metas.php?sucesso=cadastrada");
+        exit();
+    }
+}
+
+public function editarMeta()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        global $conexao;
+
+        $email = $_SESSION['email'] ?? null;
+
+        if (!$email) {
+            die("Aluno não está logado.");
+        }
+
+        $metaModel = new Meta($conexao);
+
+        $metaModel->atualizarMeta(
+            $_POST['id'],
+            $email,
+            $_POST['titulo'],
+            $_POST['descricao']
+        );
+
+        header("Location: /projetoDeEstudos/views/aluno/metas.php?sucesso=editada");
+        exit();
+    }
+}
+
+public function deletarMeta()
+{
+    if (isset($_GET['id'])) {
+        global $conexao;
+
+        $email = $_SESSION['email'] ?? null;
+
+        if (!$email) {
+            die("Aluno não está logado.");
+        }
+
+        $metaModel = new Meta($conexao);
+
+        $metaModel->deletarMeta(
+            $_GET['id'],
+            $email
+        );
+
+        header("Location: /projetoDeEstudos/views/aluno/metas.php?sucesso=deletada");
+        exit();
+    }
+}
+
+public function concluirMeta()
+{
+    if (isset($_GET['id'])) {
+        global $conexao;
+
+        $email = $_SESSION['email'] ?? null;
+
+        if (!$email) {
+            die("Aluno não está logado.");
+        }
+
+        $metaModel = new Meta($conexao);
+
+        $metaModel->concluirMeta(
+            $_GET['id'],
+            $email
+        );
+
+        header("Location: /projetoDeEstudos/views/aluno/metas.php");
+        exit();
+    }
+}
 }

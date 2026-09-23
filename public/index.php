@@ -52,6 +52,26 @@ switch ($action) {
         $admin->deletarResumo();
         break;
 
+    case 'criarMeta':
+        $aluno = new AlunoController();
+        $aluno->criarMeta();
+        break;
+
+    case 'editarMeta':
+        $aluno = new AlunoController();
+        $aluno->editarMeta();
+        break;
+
+    case 'deletarMeta':
+        $aluno = new AlunoController();
+        $aluno->deletarMeta();
+        break;
+
+    case 'concluirMeta':
+        $aluno = new AlunoController();
+        $aluno->concluirMeta();
+        break;
+
     case 'corrigirQuestoes':
         $aluno = new AlunoController();
         $aluno->corrigirQuestoes();

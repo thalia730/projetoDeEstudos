@@ -79,8 +79,7 @@ $materias = $materiaModel->listarMaterias();
         <main class="dashboard-welcome">
             <h3>Visão Geral</h3>
             <p>
-                Cadastre novas questões ou selecione uma matéria para visualizar,
-                editar ou excluir suas questões.
+                Bem-vindo ao painel administrativo! Aqui você pode organizar e gerenciar os conteúdos da plataforma.
             </p>
         </main>
     </div>
